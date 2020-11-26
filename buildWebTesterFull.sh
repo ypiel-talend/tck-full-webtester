@@ -2,7 +2,7 @@
 
 function usage(){
 	echo "Build full TCK Web tester"
-	echo "Usage : $0 <tck_version> <connectors_version> <install_dir> <connectors_list_file>"
+	echo "Usage : $0 <tck_version> <connectors_version> <install_dir> <connectors_list_file> <port>"
 	echo
 	echo "Parameter '$1' is needed."
 	echo
@@ -13,6 +13,7 @@ function usage(){
 [ -z ${2+x} ] && usage "connectors_version"
 [ -z ${3+x} ] && usage "install_dir"
 [ -z ${4+x} ] && usage "connectors_list_file"
+[ -z ${5+x} ] && usage "port"
 
 export VERS="$1"
 export CONN_VERS="$2"
@@ -20,6 +21,7 @@ export INSTALL_DIR="$3"
 export SETENV=${INSTALL_DIR}/component-server-distribution/bin/setenv.sh
 export REGISTY=${INSTALL_DIR}/component-server-distribution/conf/components-registry.properties
 export CONNECTORS_LIST="$4"
+export PORT="$5"
 
 echo "Build web tester multi connector."
 echo "Install dir	: ${INSTALL_DIR}"
@@ -54,7 +56,7 @@ function build_setenv {
 	chmod +x ${SETENV}
 	echo "export JAVA_HOME=\"${JAVA_HOME}\"" > ${SETENV}
 	echo "export ENDORSED_PROP=\"ignored.endorsed.dir\"" >> ${SETENV}
-	echo "export MEECROWAVE_OPTS=\"-Dhttp=1234\"" >> ${SETENV}
+	echo "export MEECROWAVE_OPTS=\"-Dhttp=${PORT}\"" >> ${SETENV}
 	echo "export MEECROWAVE_OPTS=\"-Dtalend.component.server.component.registry=conf/components-registry.properties \${MEECROWAVE_OPTS}\"" >> ${SETENV}
 }
 
