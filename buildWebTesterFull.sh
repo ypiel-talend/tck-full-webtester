@@ -1,11 +1,25 @@
 #!/bin/bash
 
-export VERS=1.1.24
-export CONN_VERS=1.15.0-SNAPSHOT
-export INSTALL_DIR=/home/ypiel/Talend/WEBTesterFull/20201026/
+function usage(){
+	echo "Build full TCK Web tester"
+	echo "Usage : $0 <tck_version> <connectors_version> <install_dir> <connectors_list_file>"
+	echo
+	echo "Parameter '$1' is needed."
+	echo
+	exit 1
+}
+
+[ -z ${1+x} ] && usage "tck_version"
+[ -z ${2+x} ] && usage "connectors_version"
+[ -z ${3+x} ] && usage "install_dir"
+[ -z ${4+x} ] && usage "connectors_list_file"
+
+export VERS="$1"
+export CONN_VERS="$2"
+export INSTALL_DIR="$3"
 export SETENV=${INSTALL_DIR}/component-server-distribution/bin/setenv.sh
 export REGISTY=${INSTALL_DIR}/component-server-distribution/conf/components-registry.properties
-export CONNECTORS_LIST="connectors.list"
+export CONNECTORS_LIST="$4"
 
 echo "Build web tester multi connector."
 echo "Install dir	: ${INSTALL_DIR}"
