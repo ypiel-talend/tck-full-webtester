@@ -45,7 +45,7 @@ function build_setenv {
 }
 
 function generate_registry {
-	eho "" > ${REGISTY}
+	echo "" > ${REGISTY}
 	n=0
 	while read -r conn;
 	do
