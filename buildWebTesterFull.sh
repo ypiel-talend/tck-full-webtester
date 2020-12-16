@@ -48,7 +48,7 @@ function download_all {
 	download_lib "component-runtime-beam"
 
 	wget -O  ${INSTALL_DIR}/component-server-distribution/lib/avro-1.10.0.jar  https://apache.mediamirrors.org/avro/avro-1.10.0/java/avro-1.10.0.jar
-	wget -O ${INSTALL_DIR}/component-server-distribution/lib/beam-sdks-java-core-2.24.0.jar https://repo1.maven.org/maven2/org/apache/beam/beam-sdks-java-core/2.24.0/beam-sdks-java-core-2.24.0.jar
+	wget -O ${INSTALL_DIR}/component-server-distribution/lib/beam-sdks-java-core-2.25.0.jar https://repo1.maven.org/maven2/org/apache/beam/beam-sdks-java-core/2.25.0/beam-sdks-java-core-2.25.0.jar
 }
 
 function build_setenv {
@@ -65,6 +65,8 @@ function generate_registry {
 	n=0
 	while read -r conn;
 	do
+                [[ "${conn}" =~ "#" ]] && echo "Skip ${conn}..." && continue
+
 		n=$((n+1))
 		echo "${n} : add ${conn}..."
 		echo "conn_${n}=org.talend.components\\:${conn}\\:${CONN_VERS}" >> ${REGISTY}
