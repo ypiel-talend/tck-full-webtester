@@ -25,3 +25,15 @@ pulsar
 rabbitmq
 thoughtspot
 workday
+azure-eventhubs
+dataprep-functions
+dq-processors
+elasticsearch
+fileio
+jdbc-ee
+kafka
+kinesis
+localio
+localstorage
+preparation-processor
+processing-beam
